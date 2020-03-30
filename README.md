@@ -1,4 +1,5 @@
 # ME122-QuaranTeam
+<<<<<<< HEAD
 ## Stuff we have
 ### Sean
 Adafruit feather with WiFi: https://learn.adafruit.com/adafruit-feather-huzzah-esp8266
@@ -13,3 +14,6 @@ Mad skills
 Thermal printer web stuff: https://exciting.io/2012/04/12/hello-printer/
 Adafruit thermal printer basic setup: https://learn.adafruit.com/mini-thermal-receipt-printer
 
+=======
+# May our tea be hot and our coughs wet
+>>>>>>> 50d9bed709ae308f36062b6743ff13cc2034ed9d
