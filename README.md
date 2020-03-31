@@ -7,6 +7,7 @@ Adafruit feather with WiFi: https://learn.adafruit.com/adafruit-feather-huzzah-e
 Raspberry Pi Zero: https://www.raspberrypi.org/products/raspberry-pi-zero/
 ### Whitman
 Woodshop n' such
+ (also a cute ass dog)
 ### Carter
 Woodshop n' such
 ### Warren
