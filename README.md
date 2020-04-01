@@ -10,6 +10,7 @@ Woodshop n' such
  (also a cute ass dog)
 ### Carter
 Woodshop n' such
+Basic soldering iron
 ### Warren
 Mad skills
 ## Resources
