@@ -27,6 +27,10 @@ THE PRINTER IS DEAD. LONG LIVE THE CLAW.
 
 [rPi motor driver](https://www.amazon.com/Controller-Module-Bridge-Stepper-Arduino/dp/B07RB2LWD7/ref=sr_1_5?dchild=1&keywords=l298n&qid=1586215727&sr=8-5)
 
+[Lego robotic arm](https://www.youtube.com/watch?v=961IdKfa5rI)
+
+[Some interesting simple mechanisms](https://www.youtube.com/watch?v=zTXQqBvHktQ)
+
 =======
 ## May our tea be hot and our coughs wet
 
