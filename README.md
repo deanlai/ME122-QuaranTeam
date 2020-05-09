@@ -31,6 +31,8 @@ THE PRINTER IS DEAD. LONG LIVE THE CLAW.
 
 [Some interesting simple mechanisms](https://www.youtube.com/watch?v=zTXQqBvHktQ)
 
+[Lego Motor details](https://www.philohome.com/motors/motorcomp.htm)
+
 =======
 ## May our tea be hot and our coughs wet
 
