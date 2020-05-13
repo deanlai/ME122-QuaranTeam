@@ -33,6 +33,10 @@ THE PRINTER IS DEAD. LONG LIVE THE CLAW.
 
 [Lego Motor details](https://www.philohome.com/motors/motorcomp.htm)
 
+[PiTunnel - Remote access without port forwarding](https://www.pitunnel.com)
+
+[How to setup Rpi without monitor/keyboard](https://www.youtube.com/watch?v=h3cCHN3MBvs)
+
 =======
 ## May our tea be hot and our coughs wet
 
