@@ -1,8 +1,7 @@
 # motorcontrol.py -- controls motors for ME122 robot arm using gpiozero and
-# curses libraries
 
 import gpiozero as gz
-import curses
+from blessed import Terminal
 
 # Constants
 BASE_HI, BASE_LOW = 26, 21
@@ -46,8 +45,12 @@ class DummyMotor():
         return 0
 
 
-screen = setupCurses()
+term = Terminal()
 base, elbow1, elbow2, claw = dummySetupMotors()
+
+print(term.home + term.clear + term.move_y(term.height // 2))
+print(term.bright_black_on_moccasin(term.center('press WASD or IJKL to control
+                                                the arm.')))
 
 try:
     while True:
