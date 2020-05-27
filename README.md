@@ -37,6 +37,8 @@ THE PRINTER IS DEAD. LONG LIVE THE CLAW.
 
 [How to setup Rpi without monitor/keyboard](https://www.youtube.com/watch?v=h3cCHN3MBvs)
 
+Libraries we use for motor control: [gpiozero](https://gpiozero.readthedocs.io/en/stable/), curses (see gpiozero "Keyboard Control"), [Blessed](https://blessed.readthedocs.io/en/latest/index.html)
+
 =======
 ## May our tea be hot and our coughs wet
 
