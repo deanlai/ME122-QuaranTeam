@@ -5,7 +5,7 @@ import gpiozero as gz
 import curses
 
 # Constants
-BASE_HI, BASE_LOW = 26, 21
+BASE_HI, BASE_LOW = 11, 13 
 ELBOW1_HI, ELBOW1_LOW = 19, 20
 ELBOW2_HI, ELBOW2_LOW = 13, 16
 CLAW_HI, CLAW_LOW = 5, 6
@@ -47,7 +47,7 @@ class DummyMotor():
 
 
 screen = setupCurses()
-base, elbow1, elbow2, claw = dummySetupMotors()
+base, elbow1, elbow2, claw = setupMotors()
 
 try:
     while True:
