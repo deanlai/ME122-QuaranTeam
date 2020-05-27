@@ -9,20 +9,8 @@ ELBOW1_HI, ELBOW1_LOW = 19, 20
 ELBOW2_HI, ELBOW2_LOW = 13, 16
 CLAW_HI, CLAW_LOW = 5, 6
 
+# Classes
 # Functions
-def setupCurses():
-    screen = curses.initscr()
-    curses.noecho()
-    curses.cbreak()
-    screen.keypad(True)
-    return screen
-
-def closeCurses():
-    curses.nocbreak()
-    screen.keypad(0)
-    curses.echo()
-    curses.endwin()
-
 def setupMotors():
     base = gz.Motor(BASE_HI, BASE_LOW)
     elbow1 = gz.Motor(ELBOW1_HI, ELBOW1_LOW)
@@ -39,56 +27,48 @@ class DummyMotor():
         pass
 
     def forward(self):
-        return 0
+        print('forward')
 
     def backward(self):
-        return 0
+        print('backward')
+
+    def stop(self):
+        pass
+
+def runMotors(key, motors, motorKeys):
+    for motor in motors:
+        if key in  motorKeys[motor]:
+            if motorKeys[motor][key] == 1:
+                motor.forward()
+            else:
+                motor.backward()
+
+def stopMotors(motors):
+    for motor in motors:
+        motor.stop()
+    print('stop')
 
 
 term = Terminal()
 base, elbow1, elbow2, claw = dummySetupMotors()
+motors = [base, elbow1, elbow2, claw]
+motorKeys = {base: {'a': 1, 'd': 0},
+             elbow1: {'w': 1, 's': 0},
+             elbow2: {'i': 1, 'k': 0},
+             claw: {'j': 1, 'l': 0}}
 
 print(term.home + term.clear + term.move_y(term.height // 2))
-print(term.bright_black_on_moccasin(term.center('press WASD or IJKL to control
-                                                the arm.')))
+print(term.gray25_on_moccasin(term.center('press WASD or IJKL to control\
+                                                the arm, q to quit.')))
+print(f"{term.home}{term.moccasin_on_gray25}{term.clear}")
 
-try:
-    while True:
-        char = screen.getch()
-        if char == ord('q'):
-            break
-        elif char == ord('a'):
-            base.forward()
-            print('base --> left')
-
-        elif char == ord('d'):
-            base.backward()
-            print('base --> right')
-
-        elif char == ord('s'):
-            elbow1.forward()
-            print('elbow1 --> down')
-
-        elif char == ord('w'):
-            base.backward()
-            print('elbow1 --> up')
-
-        elif char == ord('k'):
-            base.forward()
-            print('elbow2 --> down')
-
-        elif char == ord('i'):
-            base.backward()
-            print('elbow2 --> up')
-
-        elif char == ord('j'):
-            base.forward()
-            print('claw --> open')
-
-        elif char == ord('l'):
-            base.backward()
-            print('claw --> close')
-
-finally:
-    closeCurses()
-
+with term.cbreak():
+    val = ''
+    while val.lower() != 'q':
+        val = term.inkey(timeout=3)
+        if val != 't':
+            print(f"You pressed {val}")
+            runMotors(val, motors, motorKeys)
+        else:
+             stopMotors(motors)
+    print(f"Closing...{term.normal}")
