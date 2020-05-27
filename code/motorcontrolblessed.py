@@ -12,10 +12,10 @@ CLAW_HI, CLAW_LOW = 5, 6
 # Classes
 # Functions
 def setupMotors():
-    base = gz.Motor(BASE_HI, BASE_LOW)
-    elbow1 = gz.Motor(ELBOW1_HI, ELBOW1_LOW)
-    elbow2 = gz.Motor(ELBOW2_HI, ELBOW2_LOW)
-    claw = gz.Motor(CLAW_HI, CLAW_LOW)
+    base = gz.Motor(BASE_HI, BASE_LOW, pwm=True)
+    elbow1 = gz.Motor(ELBOW1_HI, ELBOW1_LOW pwm=True)
+    elbow2 = gz.Motor(ELBOW2_HI, ELBOW2_LOW pwm=True)
+    claw = gz.Motor(CLAW_HI, CLAW_LOW pwm=True)
     return base, elbow1, elbow2, claw
 
 def dummySetupMotors():
@@ -39,9 +39,9 @@ def runMotors(key, motors, motorKeys):
     for motor in motors:
         if key in  motorKeys[motor]:
             if motorKeys[motor][key] == 1:
-                motor.forward()
+                motor.forward(speed=.25)
             else:
-                motor.backward()
+                motor.backward(speed=.25)
 
 def stopMotors(motors):
     for motor in motors:
