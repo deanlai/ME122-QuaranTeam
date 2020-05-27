@@ -5,7 +5,7 @@ import gpiozero as gz
 import curses
 
 # Constants
-BASE_HI, BASE_LOW = 11, 13 
+BASE_HI, BASE_LOW = 11, 13
 ELBOW1_HI, ELBOW1_LOW = 19, 20
 ELBOW2_HI, ELBOW2_LOW = 13, 16
 CLAW_HI, CLAW_LOW = 5, 6
@@ -31,6 +31,12 @@ def setupMotors():
     claw = gz.Motor(CLAW_HI, CLAW_LOW)
     return base, elbow1, elbow2, claw
 
+def stopMotors(motor1, motor2, motor3, motor4):
+    motor1.stop()
+    motor2.stop()
+    motor3.stop()
+    motor4.stop()
+
 def dummySetupMotors():
     return DummyMotor(), DummyMotor(), DummyMotor(), DummyMotor()
 
@@ -54,6 +60,10 @@ try:
         char = screen.getch()
         if char == ord('q'):
             break
+
+        elif char == ' ':
+            stopMotors(base, elbow1, elbow2, claw)
+
         elif char == ord('a'):
             base.forward()
             print('base --> left')
