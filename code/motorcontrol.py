@@ -7,7 +7,7 @@ import curses
 # Constants
 BASE_HI, BASE_LOW = 11, 13
 ELBOW1_HI, ELBOW1_LOW = 19, 20
-ELBOW2_HI, ELBOW2_LOW = 13, 16
+ELBOW2_HI, ELBOW2_LOW = 22, 16
 CLAW_HI, CLAW_LOW = 5, 6
 
 # Functions
@@ -61,8 +61,9 @@ try:
         if char == ord('q'):
             break
 
-        elif char == ' ':
+        elif char == ord('t'):
             stopMotors(base, elbow1, elbow2, claw)
+            print('stop motors')
 
         elif char == ord('a'):
             base.forward()

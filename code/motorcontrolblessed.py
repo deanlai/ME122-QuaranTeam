@@ -4,9 +4,9 @@ import gpiozero as gz
 from blessed import Terminal
 
 # Constants
-BASE_HI, BASE_LOW = 26, 21
+BASE_HI, BASE_LOW = 11, 13 
 ELBOW1_HI, ELBOW1_LOW = 19, 20
-ELBOW2_HI, ELBOW2_LOW = 13, 16
+ELBOW2_HI, ELBOW2_LOW = 27, 16
 CLAW_HI, CLAW_LOW = 5, 6
 
 # Classes
@@ -59,8 +59,6 @@ motorKeys = {base: {'a': 1, 'd': 0},
 
 
 print(f"{term.home}{term.moccasin_on_gray25}{term.clear}")
-print(term.gray25_on_moccasin(term.center('press WASD or IJKL to control motors\
-    , t to stop motors, q to quit')))
 print(f"{term.move_down(2)}{term.moccasin_on_gray25}")
 
 with term.cbreak():

@@ -1,6 +1,7 @@
 import gpiozero as gz
+import time
 
-motor = Motor(11,13)
+motor = gz.Motor(11,13)
 
 motor.forward()
 time.sleep(1)
