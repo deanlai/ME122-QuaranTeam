@@ -50,25 +50,27 @@ def stopMotors(motors):
 
 
 term = Terminal()
-base, elbow1, elbow2, claw = dummySetupMotors()
+base, elbow1, elbow2, claw = setupMotors()
 motors = [base, elbow1, elbow2, claw]
 motorKeys = {base: {'a': 1, 'd': 0},
              elbow1: {'w': 1, 's': 0},
              elbow2: {'i': 1, 'k': 0},
              claw: {'j': 1, 'l': 0}}
 
-print(term.home + term.clear + term.move_y(term.height // 2))
-print(term.gray25_on_moccasin(term.center('press WASD or IJKL to control\
-                                                the arm, q to quit.')))
+
 print(f"{term.home}{term.moccasin_on_gray25}{term.clear}")
+print(term.gray25_on_moccasin(term.center('press WASD or IJKL to control motors\
+    , t to stop motors, q to quit')))
+print(f"{term.move_down(2)}{term.moccasin_on_gray25}")
 
 with term.cbreak():
     val = ''
     while val.lower() != 'q':
-        val = term.inkey(timeout=3)
-        if val != 't':
-            print(f"You pressed {val}")
-            runMotors(val, motors, motorKeys)
-        else:
-             stopMotors(motors)
+        val = term.inkey(timeout=0)
+        if val != '':
+            if val != 't':
+                print(f"You pressed {val}")
+                runMotors(val, motors, motorKeys)
+            else:
+                stopMotors(motors)
     print(f"Closing...{term.normal}")
