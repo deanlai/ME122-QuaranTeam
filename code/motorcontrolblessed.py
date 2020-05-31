@@ -1,4 +1,5 @@
-# motorcontrol.py -- controls motors for ME122 robot arm using gpiozero and
+# motorcontrol.py -- controls motors for ME122 robot arm from terminal 
+# using gpiozero and blessed libraries
 
 import gpiozero as gz
 from blessed import Terminal
