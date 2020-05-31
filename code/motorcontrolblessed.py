@@ -30,32 +30,36 @@ def runMotors(key, motors, motorKeys):
             elif motorKeys[motor][key] == 1:
                 printMotorControlString(key, motorKeys, motor, 1)
                 motor.backward(speed=.25)
-    print(term.move_up(3))
 
 def stopMotors(motors):
     for motor in motors:
         motor.stop()
-    print('Stop all motors', end="")
-    print(term.move_up(3))
+    print(term.center('Stop all motors'))
 
 def printMotorControlString(key, motorKeys, motor, direction):
-    print(f"{motorKeys[motor]['name']} --> {motorKeys[motor]['directions'][direction]}", end="")
-    print(term.move_up(1))
+    motorString = f"{motorKeys[motor]['name']} --> {motorKeys[motor]['directions'][direction]}"
+    print(term.center(motorString))
+
+def resetTerminalLine():
+    print(f"{term.home}{term.move_down(5)}")
 
 def printNewCommandString(key):
     print(term.clear_eos)
-    print(f"You pressed {key}. ")
+    commandString = f"You pressed {key}. "
+    print(term.center(commandString))
 
 def showProgramGreeting():
     print(f"{term.home}{term.moccasin_on_gray25}{term.clear}")
     print(term.gray25_on_moccasin(term.center('QUARANTEAM ARM CONTROL')))
     print(term.gray25_on_moccasin(term.center('Press WASD and IJKL to control arm, T to stop motors')))
     print(term.gray25_on_moccasin(term.center('Press Q to quit')))
-    print(f"{term.move_down(2)}{term.moccasin_on_gray25}")
+    print(f"{term.move_down(1)}{term.moccasin_on_gray25}")
 
 def closeTerminal():
     print(term.clear_eos)
-    print(f"Closing...{term.normal}")
+    closeString = f"Closing...{term.normal}"
+    print(term.gray25_on_moccasin(term.center(closeString)))
+    term.move_down()
 
 # Classes
 class DummyMotor():
@@ -95,4 +99,6 @@ with term.cbreak():
                 runMotors(key, motors, motorKeys)
             else:
                 stopMotors(motors)
+            resetTerminalLine()
+    printNewCommandString('q')
     closeTerminal()
