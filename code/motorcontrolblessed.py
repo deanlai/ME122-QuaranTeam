@@ -21,7 +21,6 @@ def dummySetupMotors():
     return DummyMotor(), DummyMotor(), DummyMotor(), DummyMotor()
 
 def runMotors(key, motors, motorKeys):
-    print(f"You pressed {key}. ", end="")
     for motor in motors:
         if key in motorKeys[motor]:
             if motorKeys[motor][key] == 0:
@@ -30,17 +29,21 @@ def runMotors(key, motors, motorKeys):
             elif motorKeys[motor][key] == 1:
                 printMotorControlString(key, motorKeys, motor, 1)
                 motor.backward(speed=.25)
-    print("")
-
-
-def printMotorControlString(key, motorKeys, motor, direction):
-    print(f"{motorKeys[motor]['name']} --> {motorKeys[motor]['directions'][direction]}", end="")
-
+    print(term.move_up(3))
 
 def stopMotors(motors):
     for motor in motors:
         motor.stop()
-    print('stop')
+    print('Stop all motors', end="")
+    print(term.move_up(3))
+
+def printMotorControlString(key, motorKeys, motor, direction):
+    print(f"{motorKeys[motor]['name']} --> {motorKeys[motor]['directions'][direction]}", end="")
+    print(term.move_up(1))
+
+def printNewCommandString(key):
+    print(term.clear_eos)
+    print(f"You pressed {key}. ")
 
 def showProgramGreeting():
     print(f"{term.home}{term.moccasin_on_gray25}{term.clear}")
@@ -48,6 +51,10 @@ def showProgramGreeting():
     print(term.gray25_on_moccasin(term.center('Press WASD and IJKL to control arm, T to stop motors')))
     print(term.gray25_on_moccasin(term.center('Press Q to quit')))
     print(f"{term.move_down(2)}{term.moccasin_on_gray25}")
+
+def closeTerminal():
+    print(term.clear_eos)
+    print(f"Closing...{term.normal}")
 
 # Classes
 class DummyMotor():
@@ -64,7 +71,7 @@ class DummyMotor():
     def stop(self):
         pass
 
-
+# Motor setup
 base, elbow1, elbow2, claw = dummySetupMotors()
 motors = [base, elbow1, elbow2, claw]
 motorKeys = {base: {'a': 0, 'd': 1, 'name': 'base', 'directions': ['left', 'right']},
@@ -72,16 +79,19 @@ motorKeys = {base: {'a': 0, 'd': 1, 'name': 'base', 'directions': ['left', 'righ
              elbow2: {'i': 0, 'k': 1, 'name': 'elbow2', 'directions': ['up', 'down']},
              claw: {'j': 0, 'l': 1, 'name': "claw", 'directions': ['open', 'closed']}}
 
+# Terminal setup
 term = Terminal()
 showProgramGreeting()
 
+# Where things actually happen
 with term.cbreak():
-    val = ''
-    while val.lower() != 'q':
-        val = term.inkey(timeout=0)
-        if val != '':
-            if val != 't':
-                runMotors(val, motors, motorKeys)
+    key = ''
+    while key.lower() != 'q':
+        key = term.inkey(timeout=0).lower()
+        if key != '':
+            printNewCommandString(key)
+            if key != 't':
+                runMotors(key, motors, motorKeys)
             else:
                 stopMotors(motors)
-    print(f"Closing...{term.normal}")
+    closeTerminal()
