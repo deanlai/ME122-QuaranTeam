@@ -4,11 +4,17 @@
 import gpiozero as gz
 from blessed import Terminal
 
-# Constants
+# Pin setup
 BASE_HI, BASE_LOW = 11, 13 
 ELBOW1_HI, ELBOW1_LOW = 19, 20
 ELBOW2_HI, ELBOW2_LOW = 27, 16
 CLAW_HI, CLAW_LOW = 5, 6
+
+# Constants
+BASE_SPEED = 0.25
+ELBOW1_SPEED = 0.25
+ELBOW2_SPEED = 0.25
+CLAW_SPEED = 0.25
 
 # Functions
 def setupMotors():
@@ -26,10 +32,10 @@ def runMotors(key, motors, motorKeys):
         if key in motorKeys[motor]:
             if motorKeys[motor][key] == 0:
                 printMotorControlString(key, motorKeys, motor, 0)
-                motor.forward(speed=.25)
+                motor.forward(speed=motorKeys[motor]['speed'])
             elif motorKeys[motor][key] == 1:
                 printMotorControlString(key, motorKeys, motor, 1)
-                motor.backward(speed=.25)
+                motor.backward(speed=motorKeys[motor]['speed'])
 
 def stopMotors(motors):
     for motor in motors:
@@ -79,10 +85,22 @@ class DummyMotor():
 # Motor setup
 base, elbow1, elbow2, claw = dummySetupMotors()
 motors = [base, elbow1, elbow2, claw]
-motorKeys = {base: {'a': 0, 'd': 1, 'name': 'base', 'directions': ['left', 'right']},
-             elbow1: {'w': 0, 's': 1, 'name': 'elbow1', 'directions': ['up', 'down']},
-             elbow2: {'i': 0, 'k': 1, 'name': 'elbow2', 'directions': ['up', 'down']},
-             claw: {'j': 0, 'l': 1, 'name': "claw", 'directions': ['open', 'closed']}}
+motorKeys = {base: {'a': 0, 'd': 1, 
+            'name': 'base', 
+            'directions': ['left', 'right'],
+            'speed': BASE_SPEED},
+             elbow1: {'w': 0, 's': 1, 
+            'name': 'elbow1', 
+            'directions': ['up', 'down'],
+            'speed': ELBOW1_SPEED},
+             elbow2: {'i': 0, 'k': 1, 
+             'name': 'elbow2', 
+             'directions': ['up', 'down'],
+             'speed': ELBOW2_SPEED},
+             claw: {'j': 0, 'l': 1, 
+             'name': "claw", 
+             'directions': ['open', 'closed'],
+             'speed': CLAW_SPEED}}
 
 # Terminal setup
 term = Terminal()
