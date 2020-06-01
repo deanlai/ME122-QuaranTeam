@@ -7,18 +7,17 @@ from blessed import Terminal
 from time import sleep
 
 # Pin setup
-BASE_HI, BASE_LOW = 11, 13 
-ELBOW1_HI, ELBOW1_LOW = 27, 16
-ELBOW2_HI, ELBOW2_LOW = 19, 20
-CLAW_HI, CLAW_LOW = 5, 6
+BASE_HI, BASE_LOW = 23, 24 
+ELBOW1_HI, ELBOW1_LOW = 5, 6 
+ELBOW2_HI, ELBOW2_LOW = 2, 3
+CLAW_HI, CLAW_LOW = 30, 31 
 
 # Time step and speed tuning for each joint
-BASE_SPEED = 0.25
-ELBOW1_SPEED = 0.25
-ELBOW2_SPEED = 0.25
-CLAW_SPEED = 0.25
-TIME_STEP = 0.2
-
+BASE_SPEED = .75
+ELBOW1_SPEED = 1
+ELBOW2_SPEED = 1
+CLAW_SPEED = 1
+TIME_STEP = 0.03
 
 # Functions
 def setupMotors():
@@ -88,7 +87,7 @@ class DummyMotor():
         pass
 
 # Motor setup
-base, elbow1, elbow2, claw = setupDummyMotors()
+base, elbow1, elbow2, claw = setupMotors()
 motors = [base, elbow1, elbow2, claw]
 # Swap 1 and 0 for motor keys to swap motor/joint movement direction
 motorKeys = {base: {'a': 0, 'd': 1, 

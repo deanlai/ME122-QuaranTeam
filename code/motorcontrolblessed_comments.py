@@ -12,10 +12,10 @@ ELBOW2_HI, ELBOW2_LOW = 19, 20
 CLAW_HI, CLAW_LOW = 5, 6
 
 # Speed tuning for each motor
-BASE_SPEED = 0.25
-ELBOW1_SPEED = 0.25
-ELBOW2_SPEED = 0.25
-CLAW_SPEED = 0.25
+BASE_SPEED = 0.5
+ELBOW1_SPEED = 0.5
+ELBOW2_SPEED = 0.5
+CLAW_SPEED = 0.5
 
 # ----------FUNCTIONS----------
 def setupMotors():
@@ -98,7 +98,7 @@ class DummyMotor():
 
 # ----------MOTOR SETUP----------
 # Note: swap setupMotors() <--> setupDummyMotors() if running on or off a raspi
-base, elbow1, elbow2, claw = setupDummyMotors()
+base, elbow1, elbow2, claw = setupMotors()
 motors = [base, elbow1, elbow2, claw]
 
 # motorKeys: sets up motor parameters for driving motors and printing actions
@@ -107,7 +107,7 @@ motors = [base, elbow1, elbow2, claw]
 #   2. direction 1 key (ex: 'b')
 #   3. name            (ex: 'base')
 #   4. directions      (ex: 'left' and 'right')
-#   5. speed           (ex: BASE_SPEED, or 0.25 [defined from 0 to 1])
+#   5. speed           (ex: BASE_SPEED, or 0.5 [defined from 0 to 1])
 #
 #   note:Swap 1 and 0 for motor keys to swap motor/joint movement direction
 motorKeys = {base: {'a': 0, 'd': 1, 
