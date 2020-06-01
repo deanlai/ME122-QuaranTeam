@@ -47,7 +47,6 @@ def runMotors(key, motors, motorKeys):
 def stopMotors(motors):
     for motor in motors:
         motor.stop()
-    print(term.center('Stop all motors'))
 
 def printMotorControlString(motorKeys, motor, direction):
     motorString = f"{motorKeys[motor]['name']} --> {motorKeys[motor]['directions'][direction]}"
