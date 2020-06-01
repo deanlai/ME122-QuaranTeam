@@ -25,7 +25,7 @@ def setupMotors():
     claw = gz.Motor(CLAW_HI, CLAW_LOW, pwm=True)
     return base, elbow1, elbow2, claw
 
-def dummySetupMotors():
+def setupDummyMotors():
     return DummyMotor(), DummyMotor(), DummyMotor(), DummyMotor()
 
 def runMotors(key, motors, motorKeys):
@@ -81,7 +81,7 @@ class DummyMotor():
         pass
 
 # Motor setup
-base, elbow1, elbow2, claw = dummySetupMotors()
+base, elbow1, elbow2, claw = setupDummyMotors()
 motors = [base, elbow1, elbow2, claw]
 # Swap 1 and 0 for motor keys to swap motor/joint movement direction
 motorKeys = {base: {'a': 0, 'd': 1, 
