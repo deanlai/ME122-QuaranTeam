@@ -6,8 +6,8 @@ from blessed import Terminal
 
 # Pin setup
 BASE_HI, BASE_LOW = 11, 13 
-ELBOW1_HI, ELBOW1_LOW = 19, 20
-ELBOW2_HI, ELBOW2_LOW = 27, 16
+ELBOW1_HI, ELBOW1_LOW = 27, 16
+ELBOW2_HI, ELBOW2_LOW = 19, 20
 CLAW_HI, CLAW_LOW = 5, 6
 
 # Constants
