@@ -1,4 +1,5 @@
-# motorcontrol.py -- controls motors for ME122 robot arm from terminal 
+# ME122 Quaranteam spring '20 group project
+# motorcontrol.py -- controls motors for a raspi robot arm from the terminal 
 # using gpiozero and blessed libraries
 
 import gpiozero as gz
@@ -10,7 +11,7 @@ ELBOW1_HI, ELBOW1_LOW = 27, 16
 ELBOW2_HI, ELBOW2_LOW = 19, 20
 CLAW_HI, CLAW_LOW = 5, 6
 
-# Constants
+# Speed tuning for each joint
 BASE_SPEED = 0.25
 ELBOW1_SPEED = 0.25
 ELBOW2_SPEED = 0.25
@@ -46,13 +47,13 @@ def printMotorControlString(key, motorKeys, motor, direction):
     motorString = f"{motorKeys[motor]['name']} --> {motorKeys[motor]['directions'][direction]}"
     print(term.center(motorString))
 
-def resetTerminalLine():
-    print(f"{term.home}{term.move_down(5)}")
-
 def printNewCommandString(key):
     print(term.clear_eos)
-    commandString = f"You pressed {key}. "
+    commandString = f"You pressed {key}"
     print(term.center(commandString))
+
+def resetTerminalLine():
+    print(f"{term.home}{term.move_down(5)}")
 
 def showProgramGreeting():
     print(f"{term.home}{term.moccasin_on_gray25}{term.clear}")
@@ -72,19 +73,17 @@ class DummyMotor():
 
     def __init__(self):
         pass
-
     def forward(self, speed):
         pass
-
     def backward(self, speed):
         pass
-
     def stop(self):
         pass
 
 # Motor setup
 base, elbow1, elbow2, claw = dummySetupMotors()
 motors = [base, elbow1, elbow2, claw]
+# Swap 1 and 0 for motor keys to swap motor/joint movement direction
 motorKeys = {base: {'a': 0, 'd': 1, 
             'name': 'base', 
             'directions': ['left', 'right'],
@@ -109,6 +108,7 @@ showProgramGreeting()
 # Where things actually happen
 with term.cbreak():
     key = ''
+
     while key.lower() != 'q':
         key = term.inkey(timeout=0).lower()
         if key != '':
@@ -118,5 +118,6 @@ with term.cbreak():
             else:
                 stopMotors(motors)
             resetTerminalLine()
+
     printNewCommandString('q')
     closeTerminal()
