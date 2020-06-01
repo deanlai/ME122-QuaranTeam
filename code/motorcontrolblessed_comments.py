@@ -26,7 +26,7 @@ def setupMotors():
     claw = gz.Motor(CLAW_HI, CLAW_LOW, pwm=True)
     return base, elbow1, elbow2, claw
 
-def dummySetupMotors():
+def setupDummyMotors():
     # Sets up dummy motors for testing code on a non-raspi device
     return DummyMotor(), DummyMotor(), DummyMotor(), DummyMotor()
 
@@ -97,8 +97,8 @@ class DummyMotor():
         pass
 
 # ----------MOTOR SETUP----------
-# Note: swap setupMotors() <--> dummySetupMotors() if running on or off a raspi
-base, elbow1, elbow2, claw = dummySetupMotors()
+# Note: swap setupMotors() <--> setupDummyMotors() if running on or off a raspi
+base, elbow1, elbow2, claw = setupDummyMotors()
 motors = [base, elbow1, elbow2, claw]
 
 # motorKeys: sets up motor parameters for driving motors and printing actions
