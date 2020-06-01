@@ -38,12 +38,12 @@ def runMotors(key, motors, motorKeys):
                 printMotorControlString(motorKeys, motor, 0)
                 motor.forward(speed=motorKeys[motor]['speed'])
                 sleep(TIME_STEP)
-                stopMotors()
+                stopMotors(motors)
             elif motorKeys[motor][key] == 1:
                 printMotorControlString(motorKeys, motor, 1)
                 motor.backward(speed=motorKeys[motor]['speed'])
                 sleep(TIME_STEP)
-                stopMotors()
+                stopMotors(motors)
 
 def stopMotors(motors):
     for motor in motors:
